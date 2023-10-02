@@ -31,5 +31,11 @@
                                                                                                 
             AntiMicrobial Activity predictioN and candIdate effecTor Annotation                 
                                                                                                 
-##################################################################################################
 ```
+
+## Installation
+
+The software can be installed with conda, using the file environment.yml:
+> conda env create -f environment.yml
+
+
