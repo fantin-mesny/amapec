@@ -4,7 +4,7 @@
 
 ### Dependencies
 
-We recommend installing amapec with `mamba`, using the file environment.yml:
+We recommend installing amapec dependencies with `mamba`, using the file environment.yml:
 ```
 mamba env create -f environment.yml
 ```
@@ -53,4 +53,15 @@ amapec [-i <directory>] [-o <directory>] [-t <num>] [-h]
   -d: with this option specified, temporary files will not be deleted (for debugging purposes).
   -h: display help
 ```
+### Re-training the model
 
+We provide in the repository the full training dataset as well as scripts to retrain the SVM classifier amapec is based on.
+```
+conda activate amapec
+trainModel.sh
+```
+Output from this training pipeline will be written in folder "retrained_model" in the amapec directory.
+
+### Contact
+
+fmesny1 \[at\] uni-koeln.de
