@@ -4,14 +4,14 @@
 
 ### Dependencies
 
-We recommend installing amapec with mamba, using the file environment.yml:
+We recommend installing amapec with `mamba`, using the file environment.yml:
 ```
 mamba env create -f environment.yml
 ```
-Installation with conda should also be possible but might fail to resolve dependencies.
+Installation with `conda` should also be possible but might fail to resolve dependencies.
 
 If you wish to re-train the prediction model yourself, additional installation of software [mercat2](https://github.com/raw-lab/mercat2) is needed.
-Please follow the developer's installation guidelines and install the software in a different mamba environment named "mamba2":
+Please follow the developer's installation guidelines and install the software in a different mamba environment named `mercat2`:
 ```
 mamba create -n mercat2 -c conda-forge -c bioconda mercat2
 ```
@@ -29,7 +29,7 @@ Run a test prediction on the provided test set:
 conda activate amapec
 amapec -i testSet 
 ```
-See the output file in testSet_AMprediction to check if prediction worked.
+See the output file in directory testSet_AMprediction to check if the prediction worked.
 The log.txt file in the output directory should inform you where the problem originates.
 
 ## Running amapec
