@@ -1,5 +1,8 @@
 # amapec v1.0
 
+## About
+amapec is...
+
 ## Installation
 
 ### Dependencies
@@ -62,6 +65,6 @@ trainModel.sh
 ```
 Output from this training pipeline will be written in folder "retrained_model" in the amapec directory.
 
-### Contact
+## Contact
 
 fmesny1 \[at\] uni-koeln.de
