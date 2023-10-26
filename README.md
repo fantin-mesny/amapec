@@ -61,7 +61,7 @@ amapec [-i <directory>] [-o <directory>] [-t <num>] [-h]
 We provide in the repository the full training dataset as well as scripts to retrain the SVM classifier amapec is based on.
 ```
 conda activate amapec
-trainModel.sh
+bash trainModel.sh
 ```
 Output from this training pipeline will be written in folder "retrained_model" in the amapec directory.
 
