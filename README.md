@@ -65,6 +65,20 @@ bash trainModel.sh
 ```
 Output from this training pipeline will be written in folder "retrained_model" in the amapec directory.
 
+You can then run amapec with the retrained model in the following way:
+```
+amapec -i /path/to/input_dir -o /path/to/output_dir -m retrained_model/model -t 40
+```
+
+## Recommendation
+
+amapec was trained on structures computed with AlphaFold2 (`--max_template_date=2021-05-14 --preset=casp14`).
+We highly recommend to use as input protein structures that were computed after signal peptide removal. 
+AlphaFold2 prediction with a signal peptide can considerably change the resulting structure, and subsequently, impact antimicrobial activity prediction.
+For this reason, using effector structures downloaded from the AlphaFold database is not recommended.
+
+Since AlphaFold is computationally demanding and may be difficult to run on a large number of proteins, we recommend the use of [ESM-Fold](https://github.com/facebookresearch/esm), which according to our experience, predicts more confident and AlphaFold-similar structures than [OmegaFold](https://github.com/HeliXonProtein/OmegaFold).  
+
 ## Contact
 
 fmesny1 \[at\] uni-koeln.de
