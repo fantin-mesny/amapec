@@ -1,4 +1,4 @@
-# amapec v1.0
+![](amapec_logo.svg)
 
 ## About
 amapec is...
