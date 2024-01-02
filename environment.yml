@@ -1,0 +1,19 @@
+name: amapec
+channels:
+  - defaults
+  - conda-forge
+  - bioconda
+  - anaconda
+  - salilab
+dependencies:
+  - scikit-learn=1.2.1
+  - libboost=1.73.0
+  - dssp=3.0.0
+  - fpocket=4.0.2
+  - joblib=1.2.0
+  - pandas=1.5.3
+  - numpy=1.23.5
+  - biopython=1.78
+  - r-seqinr=4.2_30
+  - r-peptides=2.4.4
+  - r-stringr=1.4.0
