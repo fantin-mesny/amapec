@@ -19,6 +19,7 @@ Mesny, F. & Thomma, B. P. (2024). AMAPEC: accurate antimicrobial activity predic
 You can simply download this repository or clone it to your current directory:
 ```
 git clone https://github.com/fantin-mesny/amapec
+chmod +x amapec/amapec
 ```
 ### Dependencies
 
