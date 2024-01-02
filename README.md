@@ -3,8 +3,6 @@
 ## About
 AMAPEC is...
 
-![](Fig1e.svg)
-
 ### Citation
 
 Mesny, F. & Thomma, B. P. (2024). AMAPEC: accurate antimicrobial activity prediction for fungal effector proteins. *BioRxiv*, 2024-01.
