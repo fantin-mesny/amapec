@@ -62,7 +62,9 @@ amapec [-i <directory>] [-o <directory>] [-t <num>] [-h]
 ```
 ### Re-training the model
 
-We provide in the repository the full training dataset as well as scripts to retrain the SVM classifier of AMAPEC.
+We provide in the repository the full training dataset as a zipped archive as well as scripts to retrain the SVM classifier of AMAPEC.
+Information regarding the composition of the training dataset can be found in and in the AMAPEC preprint (see citation above) and in the associated supplementary tables.
+
 ```
 conda activate amapec
 bash trainModel.sh
