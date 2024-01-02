@@ -3,7 +3,7 @@
 ## About
 AMAPEC is...
 
-![](fig1e.pdf)
+![](Fig1e.svg)
 
 ### Citation
 
