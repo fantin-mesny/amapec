@@ -17,7 +17,7 @@ mamba env create -f environment.yml
 ```
 Installation with `conda` should also be possible but might fail to resolve dependencies.
 
-If you wish to re-train the prediction model yourself, additional installation of software [mercat2](https://github.com/raw-lab/mercat2) is needed.
+(facultative) If you wish to re-train the prediction model yourself, additional installation of software [mercat2](https://github.com/raw-lab/mercat2) is needed.
 Please follow the developer's installation guidelines and install the software in a different mamba environment named `mercat2`:
 ```
 mamba create -n mercat2 -c conda-forge -c bioconda mercat2
