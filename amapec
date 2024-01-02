@@ -160,7 +160,7 @@ check_output $workingDir/pLDDTs.csv
 
 ############ Testing with pre-computed model ################
 echo " - Predicting antimicrobial activities..."
-python $scriptDir/scripts/predictFromModel_fromScratch.py -o $workingDir -pe $modelDir/probability_estimator.sav -m $modelDir/classifier.sav -struc_prop $workingDir/strucProperties.csv -seq_prop $workingDir/seqProperties.csv -seq $workingDir/transformedSeqs.fa >> $workingDir/log.txt 2>&1
+python $scriptDir/scripts/predictFromModel.py -o $workingDir -pe $modelDir/probability_estimator.sav -m $modelDir/classifier.sav -struc_prop $workingDir/strucProperties.csv -seq_prop $workingDir/seqProperties.csv -seq $workingDir/transformedSeqs.fa >> $workingDir/log.txt 2>&1
 check_output $workingDir/prediction.csv
 echo "DONE. Results written in file 'prediction.csv' (directory:" $workingDir ")"
 
