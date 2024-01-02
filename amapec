@@ -1,0 +1,174 @@
+#!/bin/bash
+version="v1.0b"
+scriptDir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+cat $scriptDir/ascii_art.txt 2> /dev/null
+
+# Define function to display help message
+function display_help {
+  echo "Usage: $0 [-i <directory>] [-o <directory>] [-t <num>] [-h]"
+  echo "  -i: directory containing protein structures in PDB format (required)"
+  echo "  -o: output directory (default: <input_directory>_AMprediction)"
+  echo "  -t: number of threads/cores to use (default: 4)"
+  echo "  -d: with this option specified, temporary files will not be deleted (for debugging purposes)"
+  echo "  -m: directory including prediction model files, in case you re-trained the predictor (default: $scriptDir/model)"
+  echo "  -h: display this help message"
+  exit 1
+}
+
+# Define function checking intermediary output files
+function check_output () {
+  local FILE=$1
+  if [ -f $FILE ]; then
+    echo "File" $FILE "has been written." >> $workingDir/log.txt 2>&1
+  else
+    echo "ERROR. File" $FILE "cannot be found. Please check the errors in log file" $workingDir/log.txt
+    exit 1
+  fi
+}
+
+# Define function to check that provided PDB files do not have special characters in their names
+#function check_special_chars {
+#    fileNamesIncludingSpecialChars=$(find $1 -type f -name "*[A-Za-z0-9._-]*.pdb")
+#    if [ -z "$fileNamesIncludingSpecialChars" ]; then
+#        echo "No file contain special characters in their names." >> $workingDir/log.txt 2>&1
+#    else
+#        echo " "
+#        echo "The following files contain special characters in their names:" $fileNamesIncludingSpecialChars >> $workingDir/log.txt 2>&1
+#        echo "ERROR: Some files contain special characters in their names (see log file for more information). Please rename them."
+#        echo " "
+#        display_help
+#    fi
+#}
+
+############### Parse command line arguments ##################
+cleanDirectory=true
+while getopts ":i:t:o:m:hd" opt; do
+  case ${opt} in
+    i ) structures=${OPTARG%/};;
+    o ) workingDir=${OPTARG%/};;
+    t ) nproc=$OPTARG;;
+    m ) modelDir=${OPTARG%/};;
+    h ) display_help;;
+    d ) cleanDirectory=false;;
+    \? ) echo "Invalid option: -$OPTARG" 1>&2; exit 1;;
+    : ) echo "Option -$OPTARG requires an argument." 1>&2; exit 1;;
+  esac
+done
+echo " "
+
+if [ -z "$structures" ]; then
+  echo " "
+  echo "ERROR: input argument (-i) is required. Please provide a directory containing protein structures in PDB format."
+  echo " "
+  display_help
+fi
+
+if [ -z "$workingDir" ]; then
+  workingDir=$structures\_AMprediction
+  echo "Output argument (-o) not provided. Creating output directory" $workingDir
+  echo " "
+fi
+
+if [ -z "$nproc" ]; then
+  nproc=4
+fi
+
+if [ -z "$modelDir" ]; then
+  modelDir=$scriptDir/model
+else
+  echo " "
+  echo "Using specified model in" $modelDir
+  echo " "
+fi
+
+
+if [ -f $workingDir/prediction.csv ]; then 
+  echo "WARNING: prediction results in" $workingDir "will be overwritten."
+  echo " "
+  rm -r $workingDir/structures
+  rm $workingDir/*
+fi
+mkdir -p $workingDir
+
+
+echo "Running amapec" $version "on PDB files in directory" $structures "..." > $workingDir/log.txt 
+echo "Running amapec" $version "on" $Nstruc "proteins using" $nproc "threads..."
+#################### Checking input files ####################
+echo " - Checking input files..."
+Nstruc=$(ls $structures/*.pdb 2> /dev/null | wc -l)
+if [ "$Nstruc" -eq "0" ]; then
+   echo " "
+   echo "ERROR: input directory does not contain any .pdb file."
+   echo " "
+   display_help
+fi
+
+#fileNamesIncludingSpecialChars=$(find $structures -type f -name "*[A-Za-z0-9._-]*.pdb")
+#if [ -z "$fileNamesIncludingSpecialChars" ]; then
+#    echo "No file contain special characters in their names." >> $workingDir/log.txt 2>&1
+#else
+#    echo "Some files contain special characters in their names." >> $workingDir/log.txt 2>&1
+#    mkdir -p $workingDir/structures
+#    python $scriptDir/scripts/renameFiles.py -i $structures -o $workingDir
+#    check_output $workingDir/renamedFiles.tsv
+#    structures=$workingDir/structures
+#fi
+
+mkdir -p $workingDir/structures
+fileNamesIncludingSpecialChars=$(python $scriptDir/scripts/renameFiles.py -i $structures -o $workingDir 2>> $workingDir/log.txt)
+if [ "$fileNamesIncludingSpecialChars" = "0" ]; then
+    echo "No file contain special characters in their names." >> $workingDir/log.txt 2>&1
+elif [ "$fileNamesIncludingSpecialChars" = "" ]; then
+    echo " "
+    echo "ERROR: problem while parsing input files with 'renameFiles.py' (see log file for more information)"
+    echo " "
+    display_help
+else
+    echo "Some files contain special characters in their names." >> $workingDir/log.txt 2>&1
+    check_output $workingDir/renamedFiles.tsv
+    structures=$workingDir/structures
+fi
+
+
+
+
+############### Extract sequences from structures ###########
+echo " - Preprocessing sequences..."
+python $scriptDir/scripts/pdbToFasta.py -i $structures -o $workingDir -nproc $nproc >> $workingDir/log.txt 2>&1
+check_output $workingDir/sequences.fasta
+if [ -f $workingDir/ignored.txt ]; then
+    echo "   WARNING: Some sequences contain the character 'X' and will be ignored. See list in file 'ignored.txt'." 
+fi
+
+############ Calculate Sequence Properties ##################
+echo " - Calculating sequence properties..."
+Rscript $scriptDir/scripts/calculateSequenceProperties.R $workingDir/sequences.fasta $workingDir/seqProperties.csv >> $workingDir/log.txt 2>&1
+check_output $workingDir/seqProperties.csv
+
+############ Get Kmer content of sequences ##################
+echo " - Transforming sequences using a reduced amino-acid alphabet..."
+python $scriptDir/scripts/transformSeqs.py -i $workingDir/sequences.fasta -o $workingDir/transformedSeqs.fa >> $workingDir/log.txt 2>&1
+check_output $workingDir/transformedSeqs.fa
+
+########### Calculate Structure Properties ##################
+echo " - Calculating structure properties..."
+python $scriptDir/scripts/calculateStructureProperties.py -nproc $nproc -i $structures -o $workingDir >> $workingDir/log.txt 2>&1
+check_output $workingDir/strucProperties.csv
+python $scriptDir/scripts/get_pLDDT.py -i $structures -o $workingDir >> $workingDir/log.txt 2>&1
+check_output $workingDir/pLDDTs.csv
+
+############ Testing with pre-computed model ################
+echo " - Predicting antimicrobial activities..."
+python $scriptDir/scripts/predictFromModel_fromScratch.py -o $workingDir -pe $modelDir/probability_estimator.sav -m $modelDir/classifier.sav -struc_prop $workingDir/strucProperties.csv -seq_prop $workingDir/seqProperties.csv -seq $workingDir/transformedSeqs.fa >> $workingDir/log.txt 2>&1
+check_output $workingDir/prediction.csv
+echo "DONE. Results written in file 'prediction.csv' (directory:" $workingDir ")"
+
+if [ "$cleanDirectory" = true ] ; then
+    echo 'Removing temporary files...' >> $workingDir/log.txt 2>&1
+    rm $workingDir/pLDDTs.csv $workingDir/seqProperties.csv $workingDir/sequences.fasta $workingDir/strucProperties.csv $workingDir/transformedSeqs.fa >> $workingDir/log.txt 2>&1
+    rm -rf $workingDir/structures >> $workingDir/log.txt 2>&1
+    rm -f $workingDir/renamedFiles.tsv
+fi
+
+echo ' '
