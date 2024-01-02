@@ -1,13 +1,13 @@
 ![](amapec_logo.svg)
 
 ## About
-amapec is...
+AMAPEC is...
 
 ## Installation
 
 ### Dependencies
 
-We recommend installing amapec dependencies with `mamba`, using the file environment.yml:
+We recommend to install AMAPEC dependencies with `mamba`, using the file environment.yml:
 ```
 mamba env create -f environment.yml
 ```
@@ -33,9 +33,9 @@ conda activate amapec
 amapec -i testSet 
 ```
 See the output file in directory testSet_AMprediction to check if the prediction worked.
-The log.txt file in the output directory should inform you where the problem originates.
+The log.txt file in the output directory should inform you about the origins of eventual problems.
 
-## Running amapec
+## Running AMAPEC
 
 ### Simple prediction
 
@@ -58,11 +58,12 @@ amapec [-i <directory>] [-o <directory>] [-t <num>] [-h]
 ```
 ### Re-training the model
 
-We provide in the repository the full training dataset as well as scripts to retrain the SVM classifier amapec is based on.
+We provide in the repository the full training dataset as well as scripts to retrain the SVM classifier of AMAPEC.
 ```
 conda activate amapec
 bash trainModel.sh
 ```
+You can edit the script header to modify inputs (positive and negative training sets) and parameters (e.g. number of threads).  
 Output from this training pipeline will be written in folder "retrained_model" in the amapec directory.
 
 You can then run amapec with the retrained model in the following way:
@@ -70,14 +71,13 @@ You can then run amapec with the retrained model in the following way:
 amapec -i /path/to/input_dir -o /path/to/output_dir -m retrained_model/model -t 40
 ```
 
-## Recommendation
+## Recommendations
 
-amapec was trained on structures computed with AlphaFold2 (`--max_template_date=2021-05-14 --preset=casp14`).
-We highly recommend to use as input protein structures that were computed after signal peptide removal. 
-AlphaFold2 prediction with a signal peptide can considerably change the resulting structure, and subsequently, impact antimicrobial activity prediction.
+We highly recommend to use AMAPEC on protein structures that were predicted from mature sequences (after signal peptide removal). 
+Structure prediction with a signal peptide can considerably affect protein geometries, and subsequently, impact antimicrobial activity prediction.
 For this reason, using effector structures downloaded from the AlphaFold database is not recommended.
 
-Since AlphaFold is computationally demanding and may be difficult to run on a large number of proteins, we recommend the use of [ESM-Fold](https://github.com/facebookresearch/esm), which according to our experience, predicts more confident and AlphaFold-similar structures than [OmegaFold](https://github.com/HeliXonProtein/OmegaFold).  
+Since AlphaFold is computationally demanding and may be difficult to run on a large number of proteins, we recommend the use of [ESM-Fold](https://github.com/facebookresearch/esm) or alternatively, of [ColabFold](https://github.com/sokrypton/ColabFold). 
 
 ## Contact
 
