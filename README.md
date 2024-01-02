@@ -14,6 +14,12 @@ Mesny, F. & Thomma, B. P. (2024). AMAPEC: accurate antimicrobial activity predic
 
 ## Installation
 
+### Main installation
+
+You can simply download this repository or clone it to your current directory:
+```
+git clone https://github.com/fantin-mesny/amapec
+```
 ### Dependencies
 
 We recommend to install AMAPEC dependencies with `mamba`, using the file environment.yml:
@@ -26,13 +32,6 @@ Installation with `conda` should also be possible but might fail to resolve depe
 Please follow the developer's installation guidelines and install the software in a different mamba environment named `mercat2`:
 ```
 mamba create -n mercat2 -c conda-forge -c bioconda mercat2
-```
-
-### Main installation
-
-You can simply download this repository or clone it to your current directory:
-```
-git clone https://github.com/fantin-mesny/amapec
 ```
 ### Check installation
 
