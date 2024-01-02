@@ -2,6 +2,7 @@
 
 ## About
 AMAPEC is a predictor of antimicrobial activity for fungal secreted proteins, that aims to assist researchers in the characterization of new effectors. By offering unprecedented functional insights into fungal secretomes (generally sparsely functionally annotated), it may aid in biological interpretations during genomic, transcriptomic and proteomic analyses.
+
 Using a (predicted) protein structure as input, AMAPEC returns:
 - a mean confidence score for the input predicted protein structure (pLDDT⁠), with the rationale that a low-confidence structure may obtain a predicted antimicrobial activity that is not biologically meaningful
 - a classification as ‘Antimicrobial’ or ‘Non-antimicrobial’
