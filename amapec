@@ -86,7 +86,7 @@ fi
 if [ -f $workingDir/prediction.csv ]; then 
   echo "WARNING: prediction results in" $workingDir "will be overwritten."
   echo " "
-  rm -r $workingDir/structures
+  rm -rf $workingDir/structures
   rm $workingDir/*
 fi
 mkdir -p $workingDir
