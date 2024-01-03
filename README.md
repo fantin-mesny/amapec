@@ -12,6 +12,10 @@ Using a (predicted) protein structure as input, AMAPEC returns:
 
 Mesny, F. & Thomma, B. P. (2024). AMAPEC: accurate antimicrobial activity prediction for fungal effector proteins. *BioRxiv*, 2024-01.
 
+## Use AMAPEC online
+
+![Click here](https://colab.research.google.com/github/fantin-mesny/amapec/blob/main/googleColab/AMAPEC.ipynb) to try AMAPEC online and compute antimicrobial activity predictions using Google Colab.
+
 ## Installation
 
 ### Main installation
