@@ -8,13 +8,13 @@ Using a (predicted) protein structure as input, AMAPEC returns:
 - a classification as ‘Antimicrobial’ or ‘Non-antimicrobial’
 - a probability score for its antimicrobial activity, that ranges between 0 (no antimicrobial activity) and 1 (highly likely to be antimicrobial).
 
-### Citation
+#### Citation
 
 Mesny, F. & Thomma, B. P. (2024). AMAPEC: accurate antimicrobial activity prediction for fungal effector proteins. *BioRxiv*, 2024-01.
 
 ## Use AMAPEC online
 
-![Click here](https://colab.research.google.com/github/fantin-mesny/amapec/blob/main/googleColab/AMAPEC.ipynb) to try AMAPEC online and compute antimicrobial activity predictions using Google Colab.
+[Click here](https://colab.research.google.com/github/fantin-mesny/amapec/blob/main/googleColab/AMAPEC.ipynb) to try AMAPEC online and compute antimicrobial activity predictions using Google Colab.
 
 ## Installation
 
