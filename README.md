@@ -101,7 +101,8 @@ AMAPEC reimplements portions of code from the following repositories:
 - [ugSUBMARINE/strucural-properties](https://github.com/ugSUBMARINE/structural-properties) (MIT license)
 - [sarisabban/Rg](https://github.com/sarisabban/Rg) (MIT license)
 - [SBRG/ssbio](https://github.com/SBRG/ssbio) (MIT license)
-For full list of references, please see the AMAPEC preprint (reference above) and additionally, the Supplementary Table 4 associated to the preprint.
+
+The full list of references can be found in the AMAPEC preprint (reference above), in the **References** section and in Supplementary Table 4.
 
 ## Contact
 
