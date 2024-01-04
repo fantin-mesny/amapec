@@ -94,6 +94,15 @@ For this reason, using effector structures downloaded from the AlphaFold databas
 
 Since AlphaFold is computationally demanding and may be difficult to run on a large number of proteins, we recommend the use of [ESM-Fold](https://github.com/facebookresearch/esm) or alternatively, of [ColabFold](https://github.com/sokrypton/ColabFold). 
 
+## References
+
+AMAPEC reimplements portions of code from the following repositories:
+- [harmslab/pdbtools](https://github.com/harmslab/pdbtools) (GPL-3.0 license)
+- [ugSUBMARINE/strucural-properties](https://github.com/ugSUBMARINE/structural-properties) (MIT license)
+- [sarisabban/Rg](https://github.com/sarisabban/Rg) (MIT license)
+- [SBRG/ssbio](https://github.com/SBRG/ssbio) (MIT license)
+For full list of references, please see the AMAPEC preprint (reference above) and additionally, the Supplementary Table 4 associated to the preprint.
+
 ## Contact
 
 fmesny1 \[at\] uni-koeln.de
