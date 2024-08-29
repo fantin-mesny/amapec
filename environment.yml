@@ -1,9 +1,7 @@
 name: amapec
 channels:
-  - defaults
   - conda-forge
   - bioconda
-  - anaconda
   - salilab
 dependencies:
   - scikit-learn=1.2.1
