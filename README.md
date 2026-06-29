@@ -10,8 +10,8 @@ Using a (predicted) protein structure as input, AMAPEC returns:
 
 #### Citation
 
-Mesny, F. & Thomma, B. P. (2024). AMAPEC: accurate antimicrobial activity prediction for fungal effector proteins. *BioRxiv*, 2024-01.
-doi: [10.1101/2024.01.04.574150](https://www.biorxiv.org/content/10.1101/2024.01.04.574150)
+Mesny, F., Wolf, V., López-Moral, A., Kraege, A., Punt, W., Liu, S., ... & Thomma, B. P. (2026). Plant-associated fungi co-opt ancient antimicrobials for host manipulation. *Science Advances*, 12(18), eaec1406.
+doi: [10.1126/sciadv.aec1406](https://doi.org/10.1126/sciadv.aec1406)
 
 ## Use AMAPEC online
 
